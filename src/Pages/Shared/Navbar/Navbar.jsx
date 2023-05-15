@@ -21,7 +21,7 @@ const Navbar = () => {
       <li><Link to="/about" className="font-bold">About</Link></li>
       <li><Link to="/services" className="font-bold">Services</Link></li>
       <li><Link to="/blog" className="font-bold">Blog</Link></li>
-      <li><Link to="/contact" className="font-bold">Contact</Link></li>
+      {user?.email ? <li><Link to="/booking" className="font-bold">My Booking</Link></li> : <></>}
     </>
   );
   return (

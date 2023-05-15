@@ -14,7 +14,8 @@ const Register = () => {
     const name = form.name.value
     const email = form.email.value;
     const password = form.password.value;
-
+    console.log(name);
+    
     createUser(email, password)
     .then(result =>{
       const currentUser = result.user
@@ -27,12 +28,6 @@ const Register = () => {
       form.reset()
     })
     .catch(error => console.log(error))
-
-    
-
-    console.log(name, email, password);
-
-
   };
 
   return (

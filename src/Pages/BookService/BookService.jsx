@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Provider/AuthProvider";
 
-const CheckOut = () => {
+const BookService = () => {
+  const {user} = useContext(AuthContext)
   const service = useLoaderData();
   const {_id, title, price, img } = service;
 
@@ -26,6 +29,7 @@ const CheckOut = () => {
             Description: message
         }
         console.log(order);
+
 
         fetch('http://localhost:5000/booking', {
             method: 'POST',
@@ -64,6 +68,7 @@ const CheckOut = () => {
                 <input
                   type="text"
                   name="email"
+                  defaultValue={user?.email}
                   placeholder="Your email"
                   className="input input-bordered"
                 />
@@ -86,11 +91,10 @@ const CheckOut = () => {
               </div>
             </div>
             <div className="form-control mt-6">
-              <input
-                type="text"
+              <textarea
                 name="message"
-                placeholder="Your email"
-                className="input input-bordered"
+                placeholder="Your message"
+                className="input input-bordered pt-2 h-28"
               />
             </div>
             <div className="form-control mt-6">
@@ -103,4 +107,4 @@ const CheckOut = () => {
   );
 };
 
-export default CheckOut;
+export default BookService;
