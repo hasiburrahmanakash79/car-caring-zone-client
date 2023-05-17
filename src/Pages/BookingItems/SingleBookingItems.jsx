@@ -1,33 +1,19 @@
-import Swal from "sweetalert2";
 
-const SingleBookingItems = ({ booking }) => {
+const SingleBookingItems = ({ booking, handleDelete, handleConfirmBooking, status }) => {
   const {_id, email, price, date, img, customerName, serviceName } = booking;
 
-  const handleDelete = id => {
-    
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/booking/${id}`,{
-          method: 'DELETE'
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.deleteCount > 0) {
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
-            }
-          });
-      }
-    });
-  };
+  // const handleDelete = id =>{
+  //   const proceed = confirm('are you sure!')
+  //   if(proceed){
+  //     fetch(`http://localhost:5000/booking/${id}` , {
+  //       method: 'DELETE'
+  //     })
+  //     .then( res => res.json())
+  //     .then( data => {
+  //       console.log(data);
+  //     })
+  //   }
+  // }
 
   return (
     <tr>
@@ -61,7 +47,7 @@ const SingleBookingItems = ({ booking }) => {
           </div>
           <div>
             <div className="font-bold">{serviceName}</div>
-            <div className="text-sm opacity-50">United States</div>
+            <div className="text-sm opacity-50">ID: {_id}</div>
           </div>
         </div>
       </td>
@@ -73,7 +59,9 @@ const SingleBookingItems = ({ booking }) => {
       <td>{date}</td>
       <td>{price}</td>
       <th>
-        <button className="btn btn-error">Pending</button>
+        { status === 'confirm' ? <span>Confirmed</span> :
+          <button onClick={() => handleConfirmBooking(_id)} className="btn btn-error">Confirm</button>
+        }
       </th>
     </tr>
   );
