@@ -1,11 +1,14 @@
 
-const SingleBookingItems = ({ booking, handleDelete, handleConfirmBooking, status }) => {
-  const {_id, email, price, date, img, customerName, serviceName } = booking;
+const SingleBookingItems = ({ booking, handleDelete, handleConfirmBooking }) => {
+  const {_id, email, price, date, img, customerName, serviceName, status } = booking;
+
+  console.log(booking);
+  console.log(status);
 
   // const handleDelete = id =>{
   //   const proceed = confirm('are you sure!')
   //   if(proceed){
-  //     fetch(`http://localhost:5000/booking/${id}` , {
+  //     fetch(`https://car-caring-server.vercel.app/booking/${id}` , {
   //       method: 'DELETE'
   //     })
   //     .then( res => res.json())
@@ -59,7 +62,7 @@ const SingleBookingItems = ({ booking, handleDelete, handleConfirmBooking, statu
       <td>{date}</td>
       <td>{price}</td>
       <th>
-        { status === 'confirm' ? <span>Confirmed</span> :
+        { status === true ? <span>Confirmed</span> :
           <button onClick={() => handleConfirmBooking(_id)} className="btn btn-error">Confirm</button>
         }
       </th>

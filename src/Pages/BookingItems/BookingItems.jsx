@@ -8,7 +8,7 @@ const BookingItems = () => {
 
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/booking?email=${user?.email}`;
+  const url = `https://car-caring-server.vercel.app/booking?email=${user?.email}`;
 
   useEffect(() => {
     fetch(url)
@@ -29,7 +29,7 @@ const BookingItems = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/booking/item/${id}`,{
+        fetch(`https://car-caring-server.vercel.app/booking/item/${id}`,{
           method: 'DELETE'
         })
           .then((res) => res.json())
@@ -47,7 +47,7 @@ const BookingItems = () => {
 
 
   const handleConfirmBooking = id =>{
-    fetch(`http://localhost:5000/booking/${id}`, {
+    fetch(`https://car-caring-server.vercel.app/booking/${id}`, {
       method: 'PATCH',
       headers: {
         'content-type' : 'application/json'
